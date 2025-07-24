@@ -128,11 +128,11 @@ process.TriggerNtuple = cms.EDAnalyzer('TriggerAnl'
      , trigDisplacedJetFilter = cms.InputTag('hltL4DisplacedDijetFullTracksHLTCaloJetTagFilterLowPt', '', 'HLT') 
      , trigSummary = cms.InputTag('hltTriggerSummaryAOD', '', 'HLT')
      , primaryVertices = cms.untracked.InputTag('offlinePrimaryVerticesWithBS')
-     , jets = cms.untracked.InputTag('ak4CaloJets')
-     , jetCorr = cms.untracked.InputTag('ak4CaloL1FastL2L3ResidualCorrector')
+     , jets = cms.untracked.InputTag('ak4PFJets')#ak4CaloJets')
+     , jetCorr = cms.untracked.InputTag('ak4PFCHSL1FastL2L3ResidualCorrector')
      , triggerEvent = cms.untracked.InputTag('patTriggerEvent')
      , associatorVTX = cms.untracked.InputTag("ak4JTAatVX")
-     , JECTag = cms.untracked.string("AK4Calo")
+     , JECTag = cms.untracked.string("AK4PF")#AK4Calo")#not used
 )
 
 
@@ -141,7 +141,7 @@ process.ak4JTAatVX = cms.EDProducer("JetTracksAssociatorAtVertex",
         coneSize = cms.double(0.4),
         useAssigned = cms.bool(False),
         pvSrc = cms.InputTag("offlinePrimaryVerticesWithBS"),
-        jets = cms.InputTag("ak4CaloJets")
+        jets = cms.InputTag("ak4PFCHSJets")#CaloJets")
 )
 
     
@@ -179,12 +179,12 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 process.p = cms.Path(
         process.IsoMufilter*
-        ak4CaloL1FastL2L3ResidualCorrectorChain*
-        ak4CaloL1FastL2L3ResidualCorrector*
+        ak4PFCHSL1FastL2L3ResidualCorrectorChain*
+        ak4PFCHSL1FastL2L3ResidualCorrector*
         process.ak4JTAatVX*
         #process.patDefaultSequence*
         process.TriggerNtuple
 )
 
 
-process.source = cms.Source('PoolSource', fileNames = cms.untracked.vstring('root://cmsxrootd.fnal.gov//store/data/Run2022C/DisplacedJet/AOD/PromptReco-v1/000/355/870/00000/5fbfc24a-d2c0-454a-84dc-ac7ed0a71ee6.root'))
+process.source = cms.Source('PoolSource', fileNames = cms.untracked.vstring('root://cmsxrootd.fnal.gov//store/data/Run2023C/DisplacedJet/AOD/PromptReco-v1/000/367/095/00000/18b61edd-c0a7-44aa-9265-8548ec7f685d.root'))

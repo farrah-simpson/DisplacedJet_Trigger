@@ -63,7 +63,7 @@ class TriggerAnl : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       edm::InputTag trigPromptJetFilter_;
       edm::InputTag trigDisplacedJetFilter_;
       edm::EDGetTokenT<trigger::TriggerEvent> trigsummaryToken_;
-      edm::EDGetTokenT<edm::View<reco::CaloJet> > jet_collT_;
+      edm::EDGetTokenT<edm::View<reco::PFJet> > jet_collT_;
       edm::EDGetTokenT<reco::VertexCollection> PVCollT_;
       edm::EDGetTokenT<reco::JetCorrector> jetCorrT_;
       edm::EDGetTokenT<pat::TriggerEvent> triggerEvent_;
