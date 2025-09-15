@@ -26,7 +26,7 @@ fout = TFile("{0}.root".format(outname), "recreate")
 
 eff_CalojetPt40 = TEfficiency("eff_CalojetPt40", "Filter Efficiency for Online Calo Jet", 120, 0, 120)
 eff_CalojetEta  = TEfficiency("eff_CalojetEta", "Filter Efficiency v.s. Eta for Online Calo Jet", 100, -2.5, 2.5) 	
-eff_PromptTrack = TEfficiency("eff_PromptTrack", "Filter Efficiencey for Prompt Track Requirement", 20, -0.5, 19.5)
+eff_PromptTrack = TEfficiency("eff_PromptTrack", "Filter Efficiency for Prompt Track Requirement", 20, -0.5, 19.5)
 eff_DisplacedTrack = TEfficiency("eff_DisplacedTrack", "Filter Efficiency for Displaced Track Requirement", 20, -0.5, 19.5) 
 #eff_hlt_HT_disp_430 = TEfficiency("eff_hlt_HT_dis_430", "Trigger Efficiency of HT430_displaceddijet40", 200, 100, 1000)
 
@@ -35,27 +35,26 @@ eff_DisplacedTrack = TEfficiency("eff_DisplacedTrack", "Filter Efficiency for Di
 nentries = tree.GetEntries()
 
 passed_evt = 0
-print nentries
 for entry in range(nentries):
    
     tree.GetEntry(entry)
-    if entry%1000==1:
-        print "Processing Event: ", entry
+    #if entry%1000==1:
 
     #HT430_filter = tree.HTfilter_fired
     if not tree.HTfilter_fired:
         continue
-    if not tree.CaloHT>500:
+    if not tree.CaloHT>200:
         continue
     
-    ncalojet = tree.calojet_pt.size()
+#    ncalojet = tree.calojet_pt.size()
+    ncalojet = min(tree.calojet_pt.size(), tree.calojet_eta.size())
     for icalojet in range(ncalojet):
-        if fabs(tree.calojet_eta.at(icalojet))<2.0:
-            eff_CalojetPt40.FillWeighted(bool(tree.calojet_tagged.at(icalojet)), weight, tree.calojet_pt.at(icalojet))
-        if tree.calojet_pt.at(icalojet)>50:
+        if tree.calojet_pt.at(icalojet)>60:
             eff_CalojetEta.FillWeighted(bool(tree.calojet_tagged.at(icalojet)), weight, tree.calojet_eta.at(icalojet))
+        #if fabs(tree.calojet_eta.at(icalojet))<2.0:
+        eff_CalojetPt40.FillWeighted(bool(tree.calojet_tagged.at(icalojet)), weight, tree.calojet_pt.at(icalojet))
 
-    njet = tree.offline_jetpt.size()
+    njet = min(tree.offline_jetpt.size(), tree.offline_jeteta.size())
     for ijet in range(njet):
         if not (tree.offline_jetpt.at(ijet)>60 and fabs(tree.offline_jeteta.at(ijet))<2.0):
             continue

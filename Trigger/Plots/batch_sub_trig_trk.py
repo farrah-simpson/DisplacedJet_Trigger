@@ -28,7 +28,7 @@ pathpyscript="{0}/{1}".format(current, pyscript)
 
 root_files = glob.glob("{0}/*.root".format(basefolder))
 if args.abs:
-    root_files=glob.glob("/eos/uscms{0}/000*/*.root".format(basefolder))
+    root_files=glob.glob("/eos/uscms{0}/*.root".format(basefolder))
     #root_files = subprocess.check_output(["eosls", "{0}/*.root".format(basefolder)])
 
 for rootfile in root_files:
@@ -37,7 +37,6 @@ for rootfile in root_files:
         rootfile=rootfile[rootfile.find("/store"): ]
         rootfile="root://cmseos.fnal.gov/"+rootfile
     #rootfile = rootfile.lstrip("/eos/uscms")
-    print rootfile
     folder0 = rootfile.split("/")[-1].rstrip(".root")
     folder1 = rootfile.split("/")[-2]
 
