@@ -1,0 +1,27 @@
+<use name="FWCore/Framework"/>
+<use name="FWCore/PluginManager"/>
+<use name="FWCore/ParameterSet"/>
+<flags EDM_PLUGIN="1"/>
+<use name="DataFormats/TrackReco"/>
+<use name="DataFormats/HLTReco"/>
+<use name="DataFormats/PatCandidates"/>
+<use name="DataFormats/GeometryCommonDetAlgo"/>
+<use name="DataFormats/HepMCCandidate"/>
+<use name="DataFormats/JetReco"/>
+<use name="DataFormats/Math"/>
+<use name="PhysicsTools/UtilAlgos"/>
+<use name="PhysicsTools/RecoUtils"/>
+<use name="FWCore/ServiceRegistry"/>
+<use name="SimTracker/TrackAssociation"/>
+<use name="HLTrigger/HLTcore"/>
+
+<use name="TrackingTools/TransientTrack"/>
+<use name="TrackingTools/Records"/>
+<use name="TrackingTools/IPTools"/>
+<use name="RecoVertex/ConfigurableVertexReco"/>
+<use name="SimDataFormats/PileupSummaryInfo"/>
+<use name="SimDataFormats/GeneratorProducts"/>
+<use name="CondFormats/JetMETObjects"/>
+<use name="JetMETCorrections/Objects"/>
+<use name="JetMETCorrections/JetCorrector"/>
+<use name="lhapdf"/>
